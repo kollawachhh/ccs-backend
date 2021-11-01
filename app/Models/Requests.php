@@ -25,6 +25,7 @@ class Requests extends Model
         'title_deed',
         'map',
         'plan',
+        'value',
     ];
 
     public function user() {

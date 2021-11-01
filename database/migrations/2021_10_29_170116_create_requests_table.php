@@ -32,7 +32,7 @@ class CreateRequestsTable extends Migration
             $table->longText('map');
             $table->longText('plan')->nullable();
             $table->timestamps();
-            
+            $table->float('value')->nullable();
         });
     }
 

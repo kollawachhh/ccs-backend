@@ -48,7 +48,7 @@ class RequestController extends Controller
 
     public function all_waiting_request(){
         $requests = DB::table('requests')
-                ->where('status', '=', 'Waiting approve')
+                ->whereIn('status', ['Waiting approve', 'Explore required', 'Exploring'])
                 ->get();
         return response()->json($requests);
     }
@@ -56,6 +56,7 @@ class RequestController extends Controller
     public function update_status(Request $request, $id){
         $requests = Requests::findOrFail($id);
         $requests->status = $request->input('status');
+        $requests->value = $request->input('value');
         $requests->save();
         
         return "update success";
