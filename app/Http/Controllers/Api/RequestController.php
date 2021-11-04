@@ -38,18 +38,21 @@ class RequestController extends Controller
         $requests = DB::table('requests')
                 ->where('user_id', '=', $id)
                 ->get();
+
         return response()->json($requests);
     }
 
     public function request_detail_by_id($id){
-        $request = Requests::findOrFail($id);
+        $request = Requests::with('user')
+                   ->where('id', '=', $id)
+                   ->get();
         return $request;
     }
 
     public function all_waiting_request(){
-        $requests = DB::table('requests')
-                ->whereIn('status', ['Waiting approve', 'Explore required', 'Exploring'])
-                ->get();
+        $user = JWTAuth::user();
+        $raw = "select *, requests.id, users.id as user_id, users.name, requests.type, requests.status from requests inner join users on requests.user_id = users.id where status in ('Waiting approve', 'Explore required', 'Exploring')";
+        $requests = DB::select(DB::raw($raw));
         return response()->json($requests);
     }
 
@@ -69,5 +72,14 @@ class RequestController extends Controller
         $requests->save();
         
         return "update success";
+    }
+
+    public function all_appointed(Request $request){
+        // $user = JWTAuth::user();
+        // $raw = "select requests.appointment from requests";
+        // $requests = DB::select(DB::raw($raw));
+        DB::table('requests')
+            ->get();
+        return response()->json($requests);
     }
 }

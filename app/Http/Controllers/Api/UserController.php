@@ -52,4 +52,11 @@ class UserController extends Controller
                 ->get();
         return response()->json($users);
     }
+
+    public function get_user_by_id($id){
+        $users = DB::table('users')
+                ->where('id', '=', $id)
+                ->get();
+        return response()->json($users);
+    }
 }

@@ -34,12 +34,14 @@ Route::get('/employee/all-customers', [CustomerController::class, 'all_customers
 Route::get('/employee/all-waiting-request', [RequestController::class, 'all_waiting_request']);
 Route::post('/employee/update-status/{id}', [RequestController::class, 'update_status']);
 Route::post('/employee/appointment/{id}', [RequestController::class, 'appointment']);
+Route::get('/employee/user/{id}', [UserController::class, 'get_user_by_id']);
 
 //customer
 Route::post('/customer/create_customer', [UserController::class, 'create_customer']);
 Route::post('/customer/create_request', [RequestController::class, 'create_request']);
 Route::get('/customer/all_requests/{id}', [RequestController::class, 'all_requests_by_id']);
 Route::get('/customer/request/{id}', [RequestController::class, 'request_detail_by_id']);
+Route::get('/customer/request/appoint-date', [RequestController::class, 'all_appointed']);
 
 // JWT-Auth
 Route::group([

@@ -21,10 +21,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->longText('image')->nullable();
             $table->string('id_card')->nullable()->unique();
-            // $table->date('birth_date')->nullable();
             $table->string('tel')->nullable();
             $table->text('address')->nullable();
-            // $table->timeTz('login_time');
+            $table->timestamp('login_time')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
